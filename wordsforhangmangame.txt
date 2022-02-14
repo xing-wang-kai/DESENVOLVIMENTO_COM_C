@@ -1,0 +1,7 @@
+6
+watermelon
+blueberry
+blackberry
+cherry
+orange
+lemon

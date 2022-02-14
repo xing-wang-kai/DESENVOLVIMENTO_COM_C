@@ -2,6 +2,30 @@
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
+#include "hangmangame.h"
+
+
+char secretyword[20];
+int acertou, enforcou, erros, hits;
+
+
+void escolhePalavra(){
+    FILE * f;
+    f = fopen("wordsforhangmangame.txt", "r");
+    
+   
+    int qtdpalavra;
+    fscanf(f, "%d", &qtdpalavra);
+
+    srand(time(0));
+    int randomico = rand() % qtdpalavra;
+
+    for(int c = 0; c <= randomico; c++){
+        fscanf(f, "%s", secretyword);
+    }
+
+    fclose(f);
+}
 
 void opengame(){
     printf("\n-----------------------------------------------------------\n");
@@ -15,7 +39,8 @@ void finalgame(){
 }
 
 void youwrong(){
-    printf("     OH MY GODS YOU BE HANGED   \n");
+            printf("   ---%s----           \n", secretyword);
+            printf("     OH MY GODS YOU BE HANGED   \n");
             printf("                                \n");
             printf("    _______________             \n");  
             printf("   /               \\           \n");
@@ -49,8 +74,8 @@ void youwin(){
             printf("         _.' '._         \n");
             printf("        '-------'        \n");
 }
-
-verificar(int *erros, int *hits, int manipulador, int *enforcou, int *acertou){
+// nesta função ultilizei alguns ponteiros para que o espaço na memória seja apontada para váriavel dentro da função e executar dentro do jogo
+void verificar(int *erros, int *hits, int manipulador, int *enforcou, int *acertou){
     if((*erros) == 1){
 
         printf("YOU HAVE %d \n", (*erros));
@@ -130,10 +155,13 @@ int main(void){
 
     // palavras são arrays que deve ser colocados o qtd de caracteres dentro de []
     // sprintf printa todo o array não somente palavra por palavra
-    char secretyword[20];
-    sprintf(secretyword, "watermelon");
+    
+    //sprintf(secretyword, "watermelon");
+    
 
-    int acertou, enforcou, erros, hits;
+    escolhePalavra();
+
+
     acertou = 0;
     enforcou = 0;
     erros = 0;
@@ -174,8 +202,6 @@ int main(void){
         printf("LOOK THE HANGMAN: %s \n", hangmanstring);
 
         verificar(&erros, &hits, strlen(secretyword), &enforcou, &acertou);
-        
-        
     }
      
     finalgame();
