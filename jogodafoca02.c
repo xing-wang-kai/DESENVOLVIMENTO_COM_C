@@ -13,7 +13,9 @@ int main(void){
 
     do{
        
-        
+        int hits = 0;
+        int erros = 0;
+
         for(int i = 0; i < strlen(palavrasecreta); i++){
             
             int achou = 0;
@@ -25,6 +27,7 @@ int main(void){
             }
             if(achou){
                 printf("[%c]", palavrasecreta[i]);
+                hits += 1;
             } else {
                 printf("_ ");
             }
@@ -36,6 +39,11 @@ int main(void){
 
         chutes[tentativa] = chute;
         tentativa ++;
+
+        if(hits == strlen(palavrasecreta)-1){
+            printf("-------------VOCE--VENCEU----------------");
+            acertou = 1;
+        }
 
     }while(!acertou && !enforcou);
 
