@@ -42,6 +42,7 @@ int main(void){
 
         if(hits == strlen(palavrasecreta)-1){
             printf("-------------VOCE--VENCEU----------------");
+            printf("-----------------------------------------");
             acertou = 1;
         }
 
